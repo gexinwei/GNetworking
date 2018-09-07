@@ -1,0 +1,31 @@
+{
+  "name": "GNetworking",
+  "version": "0.1.0",
+  "summary": "简单好用、配置方便的网络请求库。",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/gexinwei/GNetworking",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gexinwei": "gexinwei_nj@163.com"
+  },
+  "source": {
+    "git": "https://github.com/gexinwei/GNetworking.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": [
+    "GNetworking/**/*",
+    "GNetworking/Encrypt/**/*",
+    "GNetworking/Net/**/*"
+  ],
+  "dependencies": {
+    "AFNetworking": [
+
+    ]
+  }
+}

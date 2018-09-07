@@ -1,0 +1,6 @@
+framework module GNetworking {
+  umbrella header "GNetworking-umbrella.h"
+
+  export *
+  module * { export * }
+}
