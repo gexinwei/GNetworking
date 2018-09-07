@@ -12,6 +12,7 @@
 @class GNetConfig;
 
 typedef enum {
+    EncryptType_NONE,       //无需加密
     EncryptType_CUSTOM,     //自定义类型加密
     EncryptType_DES,        //DES加密
     EncryptType_3DES,       //3DES加密

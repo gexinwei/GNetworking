@@ -402,7 +402,7 @@
         
         [NETConfig removeRequest:singleURL];
         if (taskData && taskResponse) {
-            id responseObject = nil;
+            id responseObject = taskData;
             if ([NETConfig respondsToSelector:@selector(needDecrypt:)] && [NETConfig needDecrypt:url]) {
                 if ([NETConfig respondsToSelector:@selector(typeOfDecrypt:)]) {
                     EncryptType type = [NETConfig typeOfDecrypt:url];
@@ -494,7 +494,7 @@
         
         [NETConfig removeRequest:singleURL];
         if (taskData && taskResponse) {
-            id responseObject = nil;
+            id responseObject = taskData;
             if ([NETConfig respondsToSelector:@selector(needDecrypt:)] && [NETConfig needDecrypt:url]) {
                 if ([NETConfig respondsToSelector:@selector(typeOfDecrypt:)]) {
                     EncryptType type = [NETConfig typeOfDecrypt:url];
