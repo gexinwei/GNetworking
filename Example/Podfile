@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'GNetworking_Example' do
+  pod 'GNetworking', :path => '../'
+
+  target 'GNetworking_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
