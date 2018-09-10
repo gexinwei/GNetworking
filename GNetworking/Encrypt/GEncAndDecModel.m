@@ -25,8 +25,14 @@
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         NSArray *keys = ((NSDictionary *)source).allKeys;
         for (NSString *key in keys) {
+            NSString *encKey = key;
             id value = [((NSDictionary *)source) objectForKey:key];
-            NSString *encKey = [GEncAndDecModel ENC:key type:type];
+            if (NETConfig && [NETConfig respondsToSelector:@selector(sholdKeyEncrypt)]) {
+                BOOL should = [NETConfig sholdKeyEncrypt];
+                if (should) {
+                    encKey = [GEncAndDecModel ENC:key type:type];
+                }
+            }
             id encValue = [GEncAndDecModel ENC:value type:type];
             [dict setObject:encValue forKey:encKey];
         }
@@ -138,8 +144,16 @@
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         NSArray *keys = ((NSDictionary *)source).allKeys;
         for (NSString *key in keys) {
+            
+            NSString *decKey = key;
             id value = [((NSDictionary *)source) objectForKey:key];
-            NSString *decKey = [GEncAndDecModel DEC:key type:type];
+            if (NETConfig && [NETConfig respondsToSelector:@selector(sholdKeyDecrypt)]) {
+                BOOL should = [NETConfig sholdKeyDecrypt];
+                if (should) {
+                    decKey = [GEncAndDecModel DEC:key type:type];
+                }
+            }
+            
             id decValue = [GEncAndDecModel DEC:value type:type];
             [dict setObject:decValue forKey:decKey];
         }

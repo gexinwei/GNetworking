@@ -96,6 +96,20 @@ typedef enum {
 - (NSDictionary *)decryptKey:(EncryptType)type;
 
 /**
+ key-value的key是否需要加密
+
+ @return 是/否
+ */
+- (BOOL)sholdKeyEncrypt;
+
+/**
+ key-value的key是否需要解密
+ 
+ @return 是/否
+ */
+- (BOOL)sholdKeyDecrypt;
+
+/**
  自定义加密规则
  
  @param reqData 请求参数
