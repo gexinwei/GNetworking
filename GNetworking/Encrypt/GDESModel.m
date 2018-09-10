@@ -22,7 +22,14 @@
 + (NSString *)encryptUseDES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv{
     
     NSString *ciphertext = nil;
-    NSData *textData = [source dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *textData = nil;
+    if ([source isKindOfClass:[NSString class]]) {
+        textData = [source dataUsingEncoding:NSUTF8StringEncoding];
+    } else if ([source isKindOfClass:[NSData class]]) {
+        textData = (NSData *)source;
+    } else {
+        return nil;
+    }
     NSUInteger dataLength = [textData length];
     unsigned char buffer[1024];
     memset(buffer, 0, sizeof(char));
@@ -52,7 +59,14 @@
 + (NSString *)decryptUseDES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv {
     
     NSString *ciphertext = nil;
-    NSData *textData = [source dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *textData = nil;
+    if ([source isKindOfClass:[NSString class]]) {
+        textData = [source dataUsingEncoding:NSUTF8StringEncoding];
+    } else if ([source isKindOfClass:[NSData class]]) {
+        textData = (NSData *)source;
+    } else {
+        return nil;
+    }
     NSUInteger dataLength = [textData length];
     unsigned char buffer[1024];
     memset(buffer, 0, sizeof(char));
@@ -82,7 +96,14 @@
 + (NSString *)encryptUse3DES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv {
     
     NSString *ciphertext = nil;
-    NSData *textData = [source dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *textData = nil;
+    if ([source isKindOfClass:[NSString class]]) {
+        textData = [source dataUsingEncoding:NSUTF8StringEncoding];
+    } else if ([source isKindOfClass:[NSData class]]) {
+        textData = (NSData *)source;
+    } else {
+        return nil;
+    }
     NSUInteger dataLength = [textData length];
     unsigned char buffer[1024];
     memset(buffer, 0, sizeof(char));
@@ -112,7 +133,14 @@
 + (NSString *)decryptUse3DES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv {
     
     NSString *ciphertext = nil;
-    NSData *textData = [source dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *textData = nil;
+    if ([source isKindOfClass:[NSString class]]) {
+        textData = [source dataUsingEncoding:NSUTF8StringEncoding];
+    } else if ([source isKindOfClass:[NSData class]]) {
+        textData = (NSData *)source;
+    } else {
+        return nil;
+    }
     NSUInteger dataLength = [textData length];
     unsigned char buffer[1024];
     memset(buffer, 0, sizeof(char));
