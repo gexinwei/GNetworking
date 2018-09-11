@@ -18,7 +18,7 @@
  @param iv 偏移向量
  @return 加密后的数据
  */
-+ (NSString *)encryptUseDES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv;
++ (NSString *)encryptUseDES:(NSString *)source key:(NSString *)key iv:(NSString *)iv;
 
 /**
  DES解密
@@ -28,7 +28,7 @@
  @param iv 偏移向量
  @return 解密后的数据
  */
-+ (NSString *)decryptUseDES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv;
++ (NSString *)decryptUseDES:(NSString *)source key:(NSString *)key iv:(NSString *)iv;
 
 
 
@@ -40,7 +40,7 @@
  @param iv 偏移向量
  @return 加密后的数据
  */
-+ (NSString *)encryptUse3DES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv;
++ (NSString *)encryptUse3DES:(NSString *)source key:(NSString *)key iv:(NSString *)iv;
 
 /**
  3DES解密
@@ -50,6 +50,6 @@
  @param iv 偏移向量
  @return 解密后的数据
  */
-+ (NSString *)decryptUse3DES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv;
++ (NSString *)decryptUse3DES:(NSString *)source key:(NSString *)key iv:(NSString *)iv;
 
 @end

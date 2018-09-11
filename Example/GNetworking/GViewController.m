@@ -22,10 +22,9 @@
     
     NSString *abc = @"abc";
     NSLog(@"1=%@",abc);
-    Byte iv[8] = {2,3,4,5,6,7,8};
-    abc = [GDESModel encryptUse3DES:abc key:@"mddqkio9012345678901234567890123" iv:iv];
+    abc = [GDESModel encryptUse3DES:abc key:@"mddqkio9012345678901234567890123" iv:@"23456789"];
     NSLog(@"2=%@",abc);
-    abc = [GDESModel decryptUse3DES:abc key:@"mddqkio9012345678901234567890123" iv:iv];
+    abc = [GDESModel decryptUse3DES:abc key:@"mddqkio9012345678901234567890123" iv:@"23456789"];
     NSLog(@"3=%@",abc);
     
 }

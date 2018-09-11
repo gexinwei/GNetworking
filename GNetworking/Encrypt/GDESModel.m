@@ -19,7 +19,7 @@
  @param iv 偏移向量
  @return 加密后的数据
  */
-+ (NSString *)encryptUseDES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv{
++ (NSString *)encryptUseDES:(NSString *)source key:(NSString *)key iv:(NSString *)iv{
     
     //把string 转NSData
     NSData* data = [source dataUsingEncoding:NSUTF8StringEncoding];
@@ -34,11 +34,12 @@
     size_t bufferPtrSize = 0;
     size_t movedBytes = 0;
     
-    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
+    bufferPtrSize = (plainTextBufferSize + kCCBlockSizeDES) & ~(kCCBlockSizeDES - 1);
     bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
     memset((void *)bufferPtr, 0x0, bufferPtrSize);
     
     const void *vkey = (const void *) [key UTF8String];
+    const void *vinitVec = (const void *) [iv UTF8String];
     
     //配置CCCrypt
     ccStatus = CCCrypt(kCCEncrypt,
@@ -46,7 +47,7 @@
                        kCCOptionECBMode|kCCOptionPKCS7Padding, //设置模式
                        vkey,    //key
                        kCCKeySizeDES,
-                       iv,     //偏移量，这里不用，设置为nil;不用的话，必须为nil,不可以为@“”
+                       vinitVec,     //偏移量，这里不用，设置为nil;不用的话，必须为nil,不可以为@“”
                        vplainText,
                        plainTextBufferSize,
                        (void *)bufferPtr,
@@ -66,7 +67,7 @@
  @param iv 偏移向量
  @return 解密后的数据
  */
-+ (NSString *)decryptUseDES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv {
++ (NSString *)decryptUseDES:(NSString *)source key:(NSString *)key iv:(NSString *)iv {
     
     NSData *encryptData = [[NSData alloc] initWithBase64EncodedString:source options:0];
     
@@ -78,18 +79,19 @@
     size_t bufferPtrSize = 0;
     size_t movedBytes = 0;
     
-    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
+    bufferPtrSize = (plainTextBufferSize + kCCBlockSizeDES) & ~(kCCBlockSizeDES - 1);
     bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
     memset((void *)bufferPtr, 0x0, bufferPtrSize);
     
     const void *vkey = (const void *) [key UTF8String];
+    const void *vinitVec = (const void *) [iv UTF8String];
     
     ccStatus = CCCrypt(kCCDecrypt,
                        kCCAlgorithmDES,
                        kCCOptionPKCS7Padding|kCCOptionECBMode,
                        vkey,
                        kCCKeySizeDES,
-                       iv,
+                       vinitVec,
                        vplainText,
                        plainTextBufferSize,
                        (void *)bufferPtr,
@@ -111,7 +113,7 @@
  @param iv 偏移向量
  @return 加密后的数据
  */
-+ (NSString *)encryptUse3DES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv {
++ (NSString *)encryptUse3DES:(NSString *)source key:(NSString *)key iv:(NSString *)iv {
     
     //把string 转NSData
     NSData* data = [source dataUsingEncoding:NSUTF8StringEncoding];
@@ -131,14 +133,15 @@
     memset((void *)bufferPtr, 0x0, bufferPtrSize);
     
     const void *vkey = (const void *) [key UTF8String];
+    const void *vinitVec = (const void *) [iv UTF8String];
     
     //配置CCCrypt
     ccStatus = CCCrypt(kCCEncrypt,
                        kCCAlgorithm3DES, //3DES
-                       kCCOptionECBMode|kCCOptionPKCS7Padding, //设置模式
+                       kCCOptionPKCS7Padding, //设置模式
                        vkey,    //key
                        kCCKeySize3DES,
-                       iv,     //偏移量，这里不用，设置为nil;不用的话，必须为nil,不可以为@“”
+                       vinitVec,     //偏移量，这里不用，设置为nil;不用的话，必须为nil,不可以为@“”
                        vplainText,
                        plainTextBufferSize,
                        (void *)bufferPtr,
@@ -158,7 +161,7 @@
  @param iv 偏移向量
  @return 解密后的数据
  */
-+ (NSString *)decryptUse3DES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv {
++ (NSString *)decryptUse3DES:(NSString *)source key:(NSString *)key iv:(NSString *)iv {
     
     NSData *encryptData = [[NSData alloc] initWithBase64EncodedString:source options:0];
     
@@ -175,13 +178,14 @@
     memset((void *)bufferPtr, 0x0, bufferPtrSize);
     
     const void *vkey = (const void *) [key UTF8String];
+    const void *vinitVec = (const void *) [iv UTF8String];
     
     ccStatus = CCCrypt(kCCDecrypt,
                        kCCAlgorithm3DES,
-                       kCCOptionPKCS7Padding|kCCOptionECBMode,
+                       kCCOptionPKCS7Padding,
                        vkey,
                        kCCKeySize3DES,
-                       iv,
+                       vinitVec,
                        vplainText,
                        plainTextBufferSize,
                        (void *)bufferPtr,

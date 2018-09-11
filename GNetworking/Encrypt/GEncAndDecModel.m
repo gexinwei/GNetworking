@@ -61,13 +61,10 @@
                 if (NETConfig && [NETConfig respondsToSelector:@selector(encryptKey:)]) {
                     keyDict = [NETConfig encryptKey:type];
                     NSString *key = keyDict[DES_KEY];
-                    NSArray *ivArr = keyDict[DES_IV];
-                    Byte iv[ivArr.count];
-                    for (int i = 0; i < ivArr.count; i++) {
-                        iv[i] = [[ivArr objectAtIndex:i] intValue];
-                    }
-                    if (key && *iv && ivArr.count>0) {
-                        encValue = [GDESModel encryptUseDES:source key:key iv:iv];
+                    NSString *ivArr = keyDict[DES_IV];
+                    
+                    if (key && ivArr) {
+                        encValue = [GDESModel encryptUseDES:source key:key iv:ivArr];
                     } else {
                         encValue = [NSError errorWithDomain:@"DES加密方法获取加密参数 DES_KEY、DES_IV失败" code:0 userInfo:nil];
                     }
@@ -82,13 +79,10 @@
                 if (NETConfig && [NETConfig respondsToSelector:@selector(encryptKey:)]) {
                     keyDict = [NETConfig encryptKey:type];
                     NSString *key = keyDict[DES_KEY];
-                    NSArray *ivArr = keyDict[DES_IV];
-                    Byte iv[ivArr.count];
-                    for (int i = 0; i < ivArr.count; i++) {
-                        iv[i] = [[ivArr objectAtIndex:i] intValue];
-                    }
-                    if (key && *iv && ivArr.count>0) {
-                        encValue = [GDESModel encryptUse3DES:source key:key iv:iv];
+                    NSString *ivArr = keyDict[DES_IV];
+                    
+                    if (key && ivArr) {
+                        encValue = [GDESModel encryptUse3DES:source key:key iv:ivArr];
                     } else {
                         encValue = [NSError errorWithDomain:@"3DES加密方法获取加密参数 DES_KEY、DES_IV失败" code:0 userInfo:nil];
                     }
@@ -182,13 +176,10 @@
                 if (NETConfig && [NETConfig respondsToSelector:@selector(decryptKey:)]) {
                     keyDict = [NETConfig decryptKey:type];
                     NSString *key = keyDict[DES_KEY];
-                    NSArray *ivArr = keyDict[DES_IV];
-                    Byte iv[ivArr.count];
-                    for (int i = 0; i < ivArr.count; i++) {
-                        iv[i] = [[ivArr objectAtIndex:i] intValue];
-                    }
-                    if (key && *iv && ivArr.count>0) {
-                        encValue = [GDESModel decryptUseDES:source key:key iv:iv];
+                    NSString *ivArr = keyDict[DES_IV];
+                    
+                    if (key && ivArr) {
+                        encValue = [GDESModel decryptUseDES:source key:key iv:ivArr];
                     } else {
                         encValue = [NSError errorWithDomain:@"DES解密方法获取解密参数 DES_KEY、DES_IV失败" code:0 userInfo:nil];
                     }
@@ -203,13 +194,10 @@
                 if (NETConfig && [NETConfig respondsToSelector:@selector(decryptKey:)]) {
                     keyDict = [NETConfig decryptKey:type];
                     NSString *key = keyDict[DES_KEY];
-                    NSArray *ivArr = keyDict[DES_IV];
-                    Byte iv[ivArr.count];
-                    for (int i = 0; i < ivArr.count; i++) {
-                        iv[i] = [[ivArr objectAtIndex:i] intValue];
-                    }
-                    if (key && *iv && ivArr.count>0) {
-                        encValue = [GDESModel decryptUse3DES:source key:key iv:iv];
+                    NSString *ivArr = keyDict[DES_IV];
+                    
+                    if (key && ivArr) {
+                        encValue = [GDESModel decryptUse3DES:source key:key iv:ivArr];
                     } else {
                         encValue = [NSError errorWithDomain:@"3DES解密方法获取解密参数 DES_KEY、DES_IV失败" code:0 userInfo:nil];
                     }
