@@ -96,7 +96,12 @@
         
         id result;
         if (responseObject != nil) {
-            result = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+            if ([responseObject isKindOfClass:[NSString class]]) {
+                responseObject = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            if ([responseObject isKindOfClass:[NSData class]]) {
+                result = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+            }
         }
         success(result);
         
@@ -186,7 +191,12 @@
         
         id result;
         if (responseObject != nil) {
-            result = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+            if ([responseObject isKindOfClass:[NSString class]]) {
+                responseObject = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            if ([responseObject isKindOfClass:[NSData class]]) {
+                result = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+            }
         }
         success(result);
         
@@ -321,7 +331,12 @@
                                               
                                               id result;
                                               if (responseObject != nil) {
-                                                  result = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+                                                  if ([responseObject isKindOfClass:[NSString class]]) {
+                                                      responseObject = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+                                                  }
+                                                  if ([responseObject isKindOfClass:[NSData class]]) {
+                                                      result = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+                                                  }
                                               }
                                               success(result);
                                           }
@@ -413,7 +428,12 @@
             }
             
             if (responseObject != nil) {
-                data = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+                if ([responseObject isKindOfClass:[NSString class]]) {
+                    responseObject = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+                }
+                if ([responseObject isKindOfClass:[NSData class]]) {
+                    data = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+                }
             }
             
             
@@ -505,7 +525,12 @@
             }
             
             if (responseObject != nil) {
-                data = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+                if ([responseObject isKindOfClass:[NSString class]]) {
+                    responseObject = [responseObject dataUsingEncoding:NSUTF8StringEncoding];
+                }
+                if ([responseObject isKindOfClass:[NSData class]]) {
+                    data = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:NULL];
+                }
             }
             
             

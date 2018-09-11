@@ -7,12 +7,14 @@
 //
 
 #import "GAppDelegate.h"
+#import "MDDNetConfig.h"
 
 @implementation GAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [MDDNetConfig registerNetConfig];
     return YES;
 }
 

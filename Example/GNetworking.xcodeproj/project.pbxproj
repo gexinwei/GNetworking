@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E9AA22E4FC6E76E384F95E9 /* Pods_GNetworking_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9D6B2554B47E77EA47CE54 /* Pods_GNetworking_Example.framework */; };
+		5C4DED8921478C7E0001E1C0 /* MDDNetConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4DED8721478C7E0001E1C0 /* MDDNetConfig.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 		1B9D6B2554B47E77EA47CE54 /* Pods_GNetworking_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GNetworking_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B73EE42947DB1AC59ABAC57 /* Pods-GNetworking_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GNetworking_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-GNetworking_Example/Pods-GNetworking_Example.release.xcconfig"; sourceTree = "<group>"; };
 		4E264655A1A912F17C525333 /* GNetworking.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GNetworking.podspec; path = ../GNetworking.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5C4DED8721478C7E0001E1C0 /* MDDNetConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDNetConfig.m; sourceTree = "<group>"; };
+		5C4DED8821478C7E0001E1C0 /* MDDNetConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDNetConfig.h; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* GNetworking_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GNetworking_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -132,6 +135,8 @@
 		6003F593195388D20070C39A /* Example for GNetworking */ = {
 			isa = PBXGroup;
 			children = (
+				5C4DED8821478C7E0001E1C0 /* MDDNetConfig.h */,
+				5C4DED8721478C7E0001E1C0 /* MDDNetConfig.m */,
 				6003F59C195388D20070C39A /* GAppDelegate.h */,
 				6003F59D195388D20070C39A /* GAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -363,6 +368,7 @@
 				6003F59E195388D20070C39A /* GAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* GViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				5C4DED8921478C7E0001E1C0 /* MDDNetConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
