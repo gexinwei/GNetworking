@@ -21,31 +21,41 @@
  */
 + (NSString *)encryptUseDES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv{
     
-    NSString *ciphertext = nil;
-    NSData *textData = nil;
-    if ([source isKindOfClass:[NSString class]]) {
-        textData = [source dataUsingEncoding:NSUTF8StringEncoding];
-    } else if ([source isKindOfClass:[NSData class]]) {
-        textData = (NSData *)source;
-    } else {
-        return nil;
-    }
-    NSUInteger dataLength = [textData length];
-    unsigned char buffer[1024];
-    memset(buffer, 0, sizeof(char));
-    size_t numBytesEncrypted = 0;
-    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt, kCCAlgorithmDES,
-                                          kCCOptionPKCS7Padding,
-                                          [key UTF8String], kCCKeySizeDES,
-                                          iv,
-                                          [textData bytes], dataLength,
-                                          buffer, 1024,
-                                          &numBytesEncrypted);
-    if (cryptStatus == kCCSuccess) {
-        NSData *data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];
-        ciphertext = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    }
-    return ciphertext;
+    //把string 转NSData
+    NSData* data = [source dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //length
+    size_t plainTextBufferSize = [data length];
+    
+    const void *vplainText = (const void *)[data bytes];
+    
+    CCCryptorStatus ccStatus;
+    uint8_t *bufferPtr = NULL;
+    size_t bufferPtrSize = 0;
+    size_t movedBytes = 0;
+    
+    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
+    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+    memset((void *)bufferPtr, 0x0, bufferPtrSize);
+    
+    const void *vkey = (const void *) [key UTF8String];
+    
+    //配置CCCrypt
+    ccStatus = CCCrypt(kCCEncrypt,
+                       kCCAlgorithmDES, //DES
+                       kCCOptionECBMode|kCCOptionPKCS7Padding, //设置模式
+                       vkey,    //key
+                       kCCKeySizeDES,
+                       iv,     //偏移量，这里不用，设置为nil;不用的话，必须为nil,不可以为@“”
+                       vplainText,
+                       plainTextBufferSize,
+                       (void *)bufferPtr,
+                       bufferPtrSize,
+                       &movedBytes);
+    
+    NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
+    NSString *result = [myData base64EncodedStringWithOptions:0];
+    return result;
 }
 
 /**
@@ -58,31 +68,39 @@
  */
 + (NSString *)decryptUseDES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv {
     
-    NSString *ciphertext = nil;
-    NSData *textData = nil;
-    if ([source isKindOfClass:[NSString class]]) {
-        textData = [source dataUsingEncoding:NSUTF8StringEncoding];
-    } else if ([source isKindOfClass:[NSData class]]) {
-        textData = (NSData *)source;
-    } else {
-        return nil;
-    }
-    NSUInteger dataLength = [textData length];
-    unsigned char buffer[1024];
-    memset(buffer, 0, sizeof(char));
-    size_t numBytesEncrypted = 0;
-    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmDES,
-                                          kCCOptionPKCS7Padding,
-                                          [key UTF8String], kCCKeySizeDES,
-                                          iv,
-                                          [textData bytes], dataLength,
-                                          buffer, 1024,
-                                          &numBytesEncrypted);
-    if (cryptStatus == kCCSuccess) {
-        NSData *data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];
-        ciphertext = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    }
-    return ciphertext;
+    NSData *encryptData = [[NSData alloc] initWithBase64EncodedString:source options:0];
+    
+    size_t plainTextBufferSize = [encryptData length];
+    const void *vplainText = [encryptData bytes];
+    
+    CCCryptorStatus ccStatus;
+    uint8_t *bufferPtr = NULL;
+    size_t bufferPtrSize = 0;
+    size_t movedBytes = 0;
+    
+    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
+    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+    memset((void *)bufferPtr, 0x0, bufferPtrSize);
+    
+    const void *vkey = (const void *) [key UTF8String];
+    
+    ccStatus = CCCrypt(kCCDecrypt,
+                       kCCAlgorithmDES,
+                       kCCOptionPKCS7Padding|kCCOptionECBMode,
+                       vkey,
+                       kCCKeySizeDES,
+                       iv,
+                       vplainText,
+                       plainTextBufferSize,
+                       (void *)bufferPtr,
+                       bufferPtrSize,
+                       &movedBytes);
+    
+    NSString *result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)bufferPtr
+                                                                     length:(NSUInteger)movedBytes] encoding:NSUTF8StringEncoding];
+    
+    
+    return result;
 }
 
 /**
@@ -95,31 +113,41 @@
  */
 + (NSString *)encryptUse3DES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv {
     
-    NSString *ciphertext = nil;
-    NSData *textData = nil;
-    if ([source isKindOfClass:[NSString class]]) {
-        textData = [source dataUsingEncoding:NSUTF8StringEncoding];
-    } else if ([source isKindOfClass:[NSData class]]) {
-        textData = (NSData *)source;
-    } else {
-        return nil;
-    }
-    NSUInteger dataLength = [textData length];
-    unsigned char buffer[1024];
-    memset(buffer, 0, sizeof(char));
-    size_t numBytesEncrypted = 0;
-    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt, kCCAlgorithm3DES,
-                                          kCCOptionPKCS7Padding,
-                                          [key UTF8String], kCCKeySize3DES,
-                                          iv,
-                                          [textData bytes], dataLength,
-                                          buffer, 1024,
-                                          &numBytesEncrypted);
-    if (cryptStatus == kCCSuccess) {
-        NSData *data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];
-        ciphertext = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    }
-    return ciphertext;
+    //把string 转NSData
+    NSData* data = [source dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //length
+    size_t plainTextBufferSize = [data length];
+    
+    const void *vplainText = (const void *)[data bytes];
+    
+    CCCryptorStatus ccStatus;
+    uint8_t *bufferPtr = NULL;
+    size_t bufferPtrSize = 0;
+    size_t movedBytes = 0;
+    
+    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
+    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+    memset((void *)bufferPtr, 0x0, bufferPtrSize);
+    
+    const void *vkey = (const void *) [key UTF8String];
+    
+    //配置CCCrypt
+    ccStatus = CCCrypt(kCCEncrypt,
+                       kCCAlgorithm3DES, //3DES
+                       kCCOptionECBMode|kCCOptionPKCS7Padding, //设置模式
+                       vkey,    //key
+                       kCCKeySize3DES,
+                       iv,     //偏移量，这里不用，设置为nil;不用的话，必须为nil,不可以为@“”
+                       vplainText,
+                       plainTextBufferSize,
+                       (void *)bufferPtr,
+                       bufferPtrSize,
+                       &movedBytes);
+    
+    NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
+    NSString *result = [myData base64EncodedStringWithOptions:0];
+    return result;
 }
 
 /**
@@ -132,31 +160,39 @@
  */
 + (NSString *)decryptUse3DES:(NSString *)source key:(NSString *)key iv:(const Byte[])iv {
     
-    NSString *ciphertext = nil;
-    NSData *textData = nil;
-    if ([source isKindOfClass:[NSString class]]) {
-        textData = [source dataUsingEncoding:NSUTF8StringEncoding];
-    } else if ([source isKindOfClass:[NSData class]]) {
-        textData = (NSData *)source;
-    } else {
-        return nil;
-    }
-    NSUInteger dataLength = [textData length];
-    unsigned char buffer[1024];
-    memset(buffer, 0, sizeof(char));
-    size_t numBytesEncrypted = 0;
-    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithm3DES,
-                                          kCCOptionPKCS7Padding,
-                                          [key UTF8String], kCCKeySize3DES,
-                                          iv,
-                                          [textData bytes], dataLength,
-                                          buffer, 1024,
-                                          &numBytesEncrypted);
-    if (cryptStatus == kCCSuccess) {
-        NSData *data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];
-        ciphertext = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    }
-    return ciphertext;
+    NSData *encryptData = [[NSData alloc] initWithBase64EncodedString:source options:0];
+    
+    size_t plainTextBufferSize = [encryptData length];
+    const void *vplainText = [encryptData bytes];
+    
+    CCCryptorStatus ccStatus;
+    uint8_t *bufferPtr = NULL;
+    size_t bufferPtrSize = 0;
+    size_t movedBytes = 0;
+    
+    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
+    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+    memset((void *)bufferPtr, 0x0, bufferPtrSize);
+    
+    const void *vkey = (const void *) [key UTF8String];
+    
+    ccStatus = CCCrypt(kCCDecrypt,
+                       kCCAlgorithm3DES,
+                       kCCOptionPKCS7Padding|kCCOptionECBMode,
+                       vkey,
+                       kCCKeySize3DES,
+                       iv,
+                       vplainText,
+                       plainTextBufferSize,
+                       (void *)bufferPtr,
+                       bufferPtrSize,
+                       &movedBytes);
+    
+    NSString *result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)bufferPtr
+                                                                     length:(NSUInteger)movedBytes] encoding:NSUTF8StringEncoding];
+    
+    
+    return result;
 }
 
 @end

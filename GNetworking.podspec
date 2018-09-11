@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GNetworking'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = '简单好用、配置方便的网络请求库。'
 
 # This description is used to generate tags and improve search results.
