@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - GNetworking (0.1.0):
+  - GNetworking (0.1.7):
     - AFNetworking
 
 DEPENDENCIES:
@@ -30,7 +30,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  GNetworking: 811341700a7155afd04fa8bec7a61b7ae72a426d
+  GNetworking: 8037ab3180f519b564dfd5910625e40ae115dc19
 
 PODFILE CHECKSUM: f1c20bb593c433714a97c09d105737d0e2fed50c
 

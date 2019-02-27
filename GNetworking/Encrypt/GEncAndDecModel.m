@@ -15,12 +15,13 @@
 
 /**
  加密
- 
+
  @param source 需要加密数据源
  @param type 加密类型
+ @param url 加密对应url
  @return 加密后的数据
  */
-+ (id)ENC:(id)source type:(EncryptType)type {
++ (id)ENC:(id)source type:(EncryptType)type url:(NSString *)url{
     if ([source isKindOfClass:[NSDictionary class]]) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         NSArray *keys = ((NSDictionary *)source).allKeys;
@@ -30,17 +31,17 @@
             if (NETConfig && [NETConfig respondsToSelector:@selector(sholdKeyEncrypt)]) {
                 BOOL should = [NETConfig sholdKeyEncrypt];
                 if (should) {
-                    encKey = [GEncAndDecModel ENC:key type:type];
+                    encKey = [GEncAndDecModel ENC:key type:type url:url];
                 }
             }
-            id encValue = [GEncAndDecModel ENC:value type:type];
+            id encValue = [GEncAndDecModel ENC:value type:type url:url];
             [dict setObject:encValue forKey:encKey];
         }
         return dict;
     } else if ([source isKindOfClass:[NSArray class]]) {
         NSMutableArray *array = [NSMutableArray array];
         for (NSDictionary *dic in ((NSArray *)source)) {
-            [array addObject:[GEncAndDecModel ENC:dic type:type]];
+            [array addObject:[GEncAndDecModel ENC:dic type:type url:url]];
         }
         return array;
     } else {
@@ -48,8 +49,8 @@
         switch (type) {
             case EncryptType_CUSTOM:
             {
-                if (NETConfig && [NETConfig respondsToSelector:@selector(customEncryptData:)]) {
-                    encValue = [NETConfig customEncryptData:source];
+                if (NETConfig && [NETConfig respondsToSelector:@selector(customEncryptData:url:)]) {
+                    encValue = [NETConfig customEncryptData:source url:url];
                 } else {
                     encValue = [NSError errorWithDomain:@"自定义加密方法（QBNetConfigProtocol:customEncryedData）未实现" code:0 userInfo:nil];
                 }
@@ -128,12 +129,13 @@
 
 /**
  解密
- 
+
  @param source 需要解密数据源
  @param type 解密类型
+ @param url 解密对应的url
  @return 解密后的数据
  */
-+ (id)DEC:(id)source type:(EncryptType)type {
++ (id)DEC:(id)source type:(EncryptType)type url:(NSString *)url {
     if ([source isKindOfClass:[NSDictionary class]]) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         NSArray *keys = ((NSDictionary *)source).allKeys;
@@ -144,18 +146,18 @@
             if (NETConfig && [NETConfig respondsToSelector:@selector(sholdKeyDecrypt)]) {
                 BOOL should = [NETConfig sholdKeyDecrypt];
                 if (should) {
-                    decKey = [GEncAndDecModel DEC:key type:type];
+                    decKey = [GEncAndDecModel DEC:key type:type url:url];
                 }
             }
             
-            id decValue = [GEncAndDecModel DEC:value type:type];
+            id decValue = [GEncAndDecModel DEC:value type:type url:url];
             [dict setObject:decValue forKey:decKey];
         }
         return dict;
     } else if ([source isKindOfClass:[NSArray class]]) {
         NSMutableArray *array = [NSMutableArray array];
         for (NSDictionary *dic in ((NSArray *)source)) {
-            [array addObject:[GEncAndDecModel DEC:dic type:type]];
+            [array addObject:[GEncAndDecModel DEC:dic type:type url:url]];
         }
         return array;
     } else {
@@ -163,8 +165,8 @@
         switch (type) {
             case EncryptType_CUSTOM:
             {
-                if (NETConfig && [NETConfig respondsToSelector:@selector(customDecryptData:)]) {
-                    encValue = [NETConfig customDecryptData:source];
+                if (NETConfig && [NETConfig respondsToSelector:@selector(customDecryptData:url:)]) {
+                    encValue = [NETConfig customDecryptData:source url:url];
                 } else {
                     encValue = [NSError errorWithDomain:@"自定义解密方法（QBNetConfigProtocol:customDecryptData）未实现" code:0 userInfo:nil];
                 }

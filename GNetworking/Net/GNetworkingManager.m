@@ -43,7 +43,7 @@
     if ([NETConfig respondsToSelector:@selector(needEncrypt:)] && [NETConfig needEncrypt:url]) {
         if ([NETConfig respondsToSelector:@selector(typeOfEncrypt:)]) {
             EncryptType type = [NETConfig typeOfEncrypt:url];
-            params = [GEncAndDecModel ENC:params type:type];
+            params = [GEncAndDecModel ENC:params type:type url:url];
         } else {
             NSLog(@"未实现NETConfig方法：typeOfEncrypt:");
         }
@@ -88,7 +88,7 @@
         if ([NETConfig respondsToSelector:@selector(needDecrypt:)] && [NETConfig needDecrypt:url]) {
             if ([NETConfig respondsToSelector:@selector(typeOfDecrypt:)]) {
                 EncryptType type = [NETConfig typeOfDecrypt:url];
-                responseObject = [GEncAndDecModel DEC:responseObject type:type];
+                responseObject = [GEncAndDecModel DEC:responseObject type:type url:url];
             } else {
                 NSLog(@"未实现NETConfig方法：typeOfDecrypt:");
             }
@@ -138,7 +138,7 @@
     if ([NETConfig respondsToSelector:@selector(needEncrypt:)] && [NETConfig needEncrypt:url]) {
         if ([NETConfig respondsToSelector:@selector(typeOfEncrypt:)]) {
             EncryptType type = [NETConfig typeOfEncrypt:url];
-            params = [GEncAndDecModel ENC:params type:type];
+            params = [GEncAndDecModel ENC:params type:type url:url];
         } else {
             NSLog(@"未实现NETConfig方法：typeOfEncrypt:");
         }
@@ -183,7 +183,7 @@
         if ([NETConfig respondsToSelector:@selector(needDecrypt:)] && [NETConfig needDecrypt:url]) {
             if ([NETConfig respondsToSelector:@selector(typeOfDecrypt:)]) {
                 EncryptType type = [NETConfig typeOfDecrypt:url];
-                responseObject = [GEncAndDecModel DEC:responseObject type:type];
+                responseObject = [GEncAndDecModel DEC:responseObject type:type url:url];
             } else {
                 NSLog(@"未实现NETConfig方法：typeOfDecrypt:");
             }
@@ -238,7 +238,7 @@
     if ([NETConfig respondsToSelector:@selector(needEncrypt:)] && [NETConfig needEncrypt:url]) {
         if ([NETConfig respondsToSelector:@selector(typeOfEncrypt:)]) {
             EncryptType type = [NETConfig typeOfEncrypt:url];
-            params = [GEncAndDecModel ENC:params type:type];
+            params = [GEncAndDecModel ENC:params type:type url:url];
         } else {
             NSLog(@"未实现NETConfig方法：typeOfEncrypt:");
         }
@@ -323,7 +323,7 @@
                                               if ([NETConfig respondsToSelector:@selector(needDecrypt:)] && [NETConfig needDecrypt:url]) {
                                                   if ([NETConfig respondsToSelector:@selector(typeOfDecrypt:)]) {
                                                       EncryptType type = [NETConfig typeOfDecrypt:url];
-                                                      responseObject = [GEncAndDecModel DEC:responseObject type:type];
+                                                      responseObject = [GEncAndDecModel DEC:responseObject type:type url:url];
                                                   } else {
                                                       NSLog(@"未实现NETConfig方法：typeOfDecrypt:");
                                                   }
@@ -371,7 +371,7 @@
     if ([NETConfig respondsToSelector:@selector(needEncrypt:)] && [NETConfig needEncrypt:url]) {
         if ([NETConfig respondsToSelector:@selector(typeOfEncrypt:)]) {
             EncryptType type = [NETConfig typeOfEncrypt:url];
-            params = [GEncAndDecModel ENC:params type:type];
+            params = [GEncAndDecModel ENC:params type:type url:url];
         } else {
             NSLog(@"未实现NETConfig方法：typeOfEncrypt:");
         }
@@ -421,7 +421,7 @@
             if ([NETConfig respondsToSelector:@selector(needDecrypt:)] && [NETConfig needDecrypt:url]) {
                 if ([NETConfig respondsToSelector:@selector(typeOfDecrypt:)]) {
                     EncryptType type = [NETConfig typeOfDecrypt:url];
-                    responseObject = [GEncAndDecModel DEC:taskData type:type];
+                    responseObject = [GEncAndDecModel DEC:taskData type:type url:url];
                 } else {
                     NSLog(@"未实现NETConfig方法：typeOfDecrypt:");
                 }
@@ -473,7 +473,7 @@
     if ([NETConfig respondsToSelector:@selector(needEncrypt:)] && [NETConfig needEncrypt:url]) {
         if ([NETConfig respondsToSelector:@selector(typeOfEncrypt:)]) {
             EncryptType type = [NETConfig typeOfEncrypt:url];
-            params = [GEncAndDecModel ENC:params type:type];
+            params = [GEncAndDecModel ENC:params type:type url:url];
         } else {
             NSLog(@"未实现NETConfig方法：typeOfEncrypt:");
         }
@@ -518,7 +518,7 @@
             if ([NETConfig respondsToSelector:@selector(needDecrypt:)] && [NETConfig needDecrypt:url]) {
                 if ([NETConfig respondsToSelector:@selector(typeOfDecrypt:)]) {
                     EncryptType type = [NETConfig typeOfDecrypt:url];
-                    responseObject = [GEncAndDecModel DEC:taskData type:type];
+                    responseObject = [GEncAndDecModel DEC:taskData type:type url:url];
                 } else {
                     NSLog(@"未实现NETConfig方法：typeOfDecrypt:");
                 }

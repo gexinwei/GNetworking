@@ -26,17 +26,19 @@
  
  @param source 需要加密数据源
  @param type 加密类型
+ @param url 加密对应url
  @return 加密后的数据
  */
-+ (id)ENC:(id)source type:(EncryptType)type;
++ (id)ENC:(id)source type:(EncryptType)type url:(NSString *)url;
 
 /**
  解密
  
  @param source 需要解密数据源
  @param type 解密类型
+ @param url 解密对应的url
  @return 解密后的数据
  */
-+ (id)DEC:(id)source type:(EncryptType)type;
++ (id)DEC:(id)source type:(EncryptType)type url:(NSString *)url;
 
 @end

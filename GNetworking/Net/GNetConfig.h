@@ -111,19 +111,21 @@ typedef enum {
 
 /**
  自定义加密规则
- 
+
  @param reqData 请求参数
+ @param url 对应请求链接
  @return 请求参数加密结果
  */
-- (id)customEncryptData:(id)reqData;
+- (id)customEncryptData:(id)reqData url:(NSString *)url;
 
 /**
  自定义解密规则
- 
+
  @param resData 返回参数
+ @param url 对应请求链接
  @return 请求解密结果
  */
-- (id)customDecryptData:(id)resData;
+- (id)customDecryptData:(id)resData url:(NSString *)url;
 
 /**
  是否需要缓存

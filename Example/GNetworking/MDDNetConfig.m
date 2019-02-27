@@ -143,7 +143,7 @@
  @param reqData 请求参数
  @return 请求参数加密结果
  */
-- (id)customEncryptData:(id)reqData {
+- (id)customEncryptData:(id)reqData url:(NSString *)url{
     return reqData;
 }
 
@@ -153,7 +153,7 @@
  @param resData 返回参数
  @return 请求解密结果
  */
-- (id)customDecryptData:(id)resData {
+- (id)customDecryptData:(id)resData url:(NSString *)url{
     return resData;
 }
 
