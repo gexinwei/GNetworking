@@ -36,7 +36,9 @@
     
     //分装参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params addEntriesFromDictionary:param];
+    if (param != nil) {
+        [params addEntriesFromDictionary:param];
+    }
     [params addEntriesFromDictionary:commonParams];
     
     //判断数据是否需要加密
@@ -131,7 +133,9 @@
     
     //分装参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params addEntriesFromDictionary:param];
+    if (param != nil) {
+        [params addEntriesFromDictionary:param];
+    }
     [params addEntriesFromDictionary:commonParams];
     
     //判断数据是否需要加密
@@ -231,7 +235,9 @@
     
     //分装参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params addEntriesFromDictionary:param];
+    if (param != nil) {
+        [params addEntriesFromDictionary:param];
+    }
     [params addEntriesFromDictionary:commonParams];
     
     //判断数据是否需要加密
@@ -364,7 +370,9 @@
     
     //分装参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params addEntriesFromDictionary:param];
+    if (param != nil) {
+        [params addEntriesFromDictionary:param];
+    }
     [params addEntriesFromDictionary:commonParams];
     
     //判断数据是否需要加密
@@ -466,7 +474,9 @@
     
     //分装参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params addEntriesFromDictionary:param];
+    if (param != nil) {
+        [params addEntriesFromDictionary:param];
+    }
     [params addEntriesFromDictionary:commonParams];
     
     //判断数据是否需要加密

@@ -16,6 +16,13 @@ PODS:
     - AFNetworking/NSURLSession
   - GNetworking (0.1.7):
     - AFNetworking
+    - GNetworking/Encrypt (= 0.1.7)
+    - GNetworking/Net (= 0.1.7)
+  - GNetworking/Encrypt (0.1.7):
+    - AFNetworking
+    - GNetworking/Net
+  - GNetworking/Net (0.1.7):
+    - AFNetworking
 
 DEPENDENCIES:
   - GNetworking (from `../`)
@@ -30,8 +37,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  GNetworking: 8037ab3180f519b564dfd5910625e40ae115dc19
+  GNetworking: 545c462a55371cca3a38a60b472127a64f82261e
 
 PODFILE CHECKSUM: f1c20bb593c433714a97c09d105737d0e2fed50c
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.2

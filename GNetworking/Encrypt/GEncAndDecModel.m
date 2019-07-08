@@ -11,6 +11,8 @@
 #import "GMD5Model.h"
 #import "GDESModel.h"
 
+@class GNetConfig;
+
 @implementation GEncAndDecModel
 
 /**
@@ -52,7 +54,7 @@
                 if (NETConfig && [NETConfig respondsToSelector:@selector(customEncryptData:url:)]) {
                     encValue = [NETConfig customEncryptData:source url:url];
                 } else {
-                    encValue = [NSError errorWithDomain:@"自定义加密方法（QBNetConfigProtocol:customEncryedData）未实现" code:0 userInfo:nil];
+                    encValue = [NSError errorWithDomain:@"自定义加密方法（GNetConfigProtocol:customEncryedData）未实现" code:0 userInfo:nil];
                 }
             }
                 break;

@@ -18,14 +18,25 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": [
-    "GNetworking/**/*",
-    "GNetworking/Encrypt/**/*",
-    "GNetworking/Net/**/*"
-  ],
+  "source_files": "GNetworking/GNetworking.h",
   "dependencies": {
     "AFNetworking": [
 
     ]
-  }
+  },
+  "subspecs": [
+    {
+      "name": "Net",
+      "source_files": "GNetworking/Net/*.{h,m}"
+    },
+    {
+      "name": "Encrypt",
+      "source_files": "GNetworking/Encrypt/*.{h,m}",
+      "dependencies": {
+        "GNetworking/Net": [
+
+        ]
+      }
+    }
+  ]
 }

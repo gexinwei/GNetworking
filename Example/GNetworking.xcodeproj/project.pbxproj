@@ -253,7 +253,7 @@
 				ORGANIZATIONNAME = gexinwei;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = VV8R8P45TS;
+						DevelopmentTeam = 654AYUGXTZ;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -265,6 +265,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -308,7 +309,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GNetworking_Example/Pods-GNetworking_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GNetworking_Example/Pods-GNetworking_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/GNetworking/GNetworking.framework",
 			);
@@ -319,7 +320,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GNetworking_Example/Pods-GNetworking_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GNetworking_Example/Pods-GNetworking_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6D101A0C3A3303B70834AC6B /* [CP] Check Pods Manifest.lock */ = {
@@ -496,7 +497,7 @@
 			baseConfigurationReference = 1577C161BB217F3909F1FF2B /* Pods-GNetworking_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VV8R8P45TS;
+				DEVELOPMENT_TEAM = 654AYUGXTZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GNetworking/GNetworking-Prefix.pch";
 				INFOPLIST_FILE = "GNetworking/GNetworking-Info.plist";
@@ -512,7 +513,7 @@
 			baseConfigurationReference = 4B73EE42947DB1AC59ABAC57 /* Pods-GNetworking_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VV8R8P45TS;
+				DEVELOPMENT_TEAM = 654AYUGXTZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GNetworking/GNetworking-Prefix.pch";
 				INFOPLIST_FILE = "GNetworking/GNetworking-Info.plist";
