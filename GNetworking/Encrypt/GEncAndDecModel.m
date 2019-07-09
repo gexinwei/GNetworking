@@ -11,8 +11,6 @@
 #import "GMD5Model.h"
 #import "GDESModel.h"
 
-@class GNetConfig;
-
 @implementation GEncAndDecModel
 
 /**

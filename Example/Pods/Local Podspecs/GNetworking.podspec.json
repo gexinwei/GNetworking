@@ -1,6 +1,6 @@
 {
   "name": "GNetworking",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "summary": "简单好用、配置方便的网络请求库。",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/gexinwei/GNetworking",
@@ -13,11 +13,12 @@
   },
   "source": {
     "git": "https://github.com/gexinwei/GNetworking.git",
-    "tag": "0.1.7"
+    "tag": "0.1.8"
   },
   "platforms": {
     "ios": "8.0"
   },
+  "public_header_files": "GNetworking/GNetworking.h",
   "source_files": "GNetworking/GNetworking.h",
   "dependencies": {
     "AFNetworking": [
@@ -26,17 +27,29 @@
   },
   "subspecs": [
     {
-      "name": "Net",
-      "source_files": "GNetworking/Net/*.{h,m}"
+      "name": "Config",
+      "source_files": "GNetworking/Config/*.{h,m}"
     },
     {
       "name": "Encrypt",
-      "source_files": "GNetworking/Encrypt/*.{h,m}",
       "dependencies": {
-        "GNetworking/Net": [
+        "GNetworking/Config": [
 
         ]
-      }
+      },
+      "source_files": "GNetworking/Encrypt/*.{h,m}"
+    },
+    {
+      "name": "Net",
+      "dependencies": {
+        "GNetworking/Config": [
+
+        ],
+        "GNetworking/Encrypt": [
+
+        ]
+      },
+      "source_files": "GNetworking/Net/*.{h,m}"
     }
   ]
 }

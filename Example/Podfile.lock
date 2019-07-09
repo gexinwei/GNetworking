@@ -14,15 +14,20 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - GNetworking (0.1.7):
+  - GNetworking (0.1.8):
     - AFNetworking
-    - GNetworking/Encrypt (= 0.1.7)
-    - GNetworking/Net (= 0.1.7)
-  - GNetworking/Encrypt (0.1.7):
+    - GNetworking/Config (= 0.1.8)
+    - GNetworking/Encrypt (= 0.1.8)
+    - GNetworking/Net (= 0.1.8)
+  - GNetworking/Config (0.1.8):
     - AFNetworking
-    - GNetworking/Net
-  - GNetworking/Net (0.1.7):
+  - GNetworking/Encrypt (0.1.8):
     - AFNetworking
+    - GNetworking/Config
+  - GNetworking/Net (0.1.8):
+    - AFNetworking
+    - GNetworking/Config
+    - GNetworking/Encrypt
 
 DEPENDENCIES:
   - GNetworking (from `../`)
@@ -37,7 +42,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  GNetworking: 545c462a55371cca3a38a60b472127a64f82261e
+  GNetworking: fd417e75935864b9bde0691cd6f661e02a2e1501
 
 PODFILE CHECKSUM: f1c20bb593c433714a97c09d105737d0e2fed50c
 

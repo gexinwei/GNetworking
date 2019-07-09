@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "GNetConfig.h"
 
-
 #define DES_KEY             @"DES_KEY"
 #define DES_IV              @"DES_IV"
 #define RSA_PUB_KEY         @"RSA_PUB_KEY"

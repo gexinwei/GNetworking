@@ -10,11 +10,12 @@
 #endif
 #endif
 
+#import "GNetworking.h"
+#import "GNetConfig.h"
 #import "GDESModel.h"
 #import "GEncAndDecModel.h"
 #import "GMD5Model.h"
 #import "GRSAModel.h"
-#import "GNetConfig.h"
 #import "GNetworkingManager.h"
 #import "GUploadBean.h"
 

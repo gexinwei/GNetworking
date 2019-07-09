@@ -30,13 +30,21 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '8.0'
 
+  s.public_header_files = 'GNetworking/GNetworking.h'
   s.source_files = 'GNetworking/GNetworking.h'
-  s.subspec 'Net' do |ss|
-      ss.source_files = 'GNetworking/Net/*.{h,m}'
+  
+  
+  s.subspec 'Config' do |ss|
+      ss.source_files = 'GNetworking/Config/*.{h,m}'
   end
   s.subspec 'Encrypt' do |ss|
+      ss.dependency 'GNetworking/Config'
       ss.source_files = 'GNetworking/Encrypt/*.{h,m}'
-      ss.dependency 'GNetworking/Net'
+  end
+  s.subspec 'Net' do |ss|
+      ss.dependency 'GNetworking/Config'
+      ss.dependency 'GNetworking/Encrypt'
+      ss.source_files = 'GNetworking/Net/*.{h,m}'
   end
   
   # s.resource_bundles = {

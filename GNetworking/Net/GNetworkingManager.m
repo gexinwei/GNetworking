@@ -7,8 +7,8 @@
 //
 
 #import "GNetworkingManager.h"
-#import "GEncAndDecModel.h"
 #import "GNetConfig.h"
+#import "GEncAndDecModel.h"
 #import "GUploadBean.h"
 #import <AFNetworking/AFNetworking.h>
 
