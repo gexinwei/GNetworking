@@ -57,12 +57,16 @@ GNetConfig<GNetConfigProtocol> *NETConfig = nil;
  @param url 请求url+请求params
  */
 - (BOOL)addRequest:(NSString *)url {
-    NSString *obj = [self.cacheDict objectForKey:url];
-    if (obj && [obj isEqualToString:url]) {
-        return NO;
+    if (url && ![url isEqualToString:@""]) {
+        NSString *obj = [self.cacheDict objectForKey:url];
+        if (obj && [obj isEqualToString:url]) {
+            return NO;
+        }
+        [self.cacheDict setObject:url forKey:url];
+        return YES;
+    } else {
+        return YES;
     }
-    [self.cacheDict setObject:url forKey:url];
-    return YES;
 }
 
 /**
@@ -71,12 +75,16 @@ GNetConfig<GNetConfigProtocol> *NETConfig = nil;
  @param url 请求url+请求params
  */
 - (BOOL)removeRequest:(NSString *)url {
-    NSString *obj = [self.cacheDict objectForKey:url];
-    if (obj && [obj isEqualToString:url]) {
-        [self.cacheDict removeObjectForKey:url];
+    if (url && ![url isEqualToString:@""]) {
+        NSString *obj = [self.cacheDict objectForKey:url];
+        if (obj && [obj isEqualToString:url]) {
+            [self.cacheDict removeObjectForKey:url];
+            return YES;
+        }
+        return NO;
+    } else {
         return YES;
     }
-    return NO;
 }
 
 @end
