@@ -19,6 +19,15 @@
  */
 + (NSString *)encryptMD5:(NSString *)source {
     
+    if (![source isKindOfClass:[NSString class]]) {
+        NSError *error;
+        NSData *data = [NSJSONSerialization dataWithJSONObject:source options:NSJSONWritingFragmentsAllowed error:&error];
+        if (!error) {
+            source = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        } else {
+            return nil;
+        }
+    }
     NSString *ciphertext = nil;
     const char *sourceUTF8 = [source UTF8String];
     unsigned char digest[CC_MD5_DIGEST_LENGTH];

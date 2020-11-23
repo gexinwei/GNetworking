@@ -62,15 +62,17 @@
     securityPolicy.validatesDomainName = NO;
     manager.securityPolicy = securityPolicy;
     
+    NSDictionary *headers = nil;
     if (NETConfig && [NETConfig respondsToSelector:@selector(extraHeaderParams:)]) {
-        NSDictionary *dict = [NETConfig extraHeaderParams:url];
-        NSArray *allKeys = [dict allKeys];
-        for (NSString *key in allKeys) {
-            [manager.requestSerializer setValue:dict[key] forHTTPHeaderField:key];
-        }
+        headers = [NETConfig extraHeaderParams:url];
     }
     
-    NSString *paramsURL = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    NSString *paramsURL = nil;
+    if ([params isKindOfClass:[NSString class]]) {
+        paramsURL = (NSString *)params;
+    } else {
+        paramsURL = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    }
     NSString *singleURL = [NSString stringWithFormat:@"%@+%@",url,paramsURL];
     if (![NETConfig addRequest:singleURL]) {
         NSError *error = [NSError errorWithDomain:@"不要频繁请求" code:1024 userInfo:nil];
@@ -85,7 +87,8 @@
         }
     }
     
-    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:url parameters:params headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         [NETConfig removeRequest:singleURL];
         if ([NETConfig respondsToSelector:@selector(needDecrypt:)] && [NETConfig needDecrypt:url]) {
             if ([NETConfig respondsToSelector:@selector(typeOfDecrypt:)]) {
@@ -106,7 +109,6 @@
             }
         }
         success(result);
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [NETConfig removeRequest:singleURL];
         failure(error);
@@ -159,15 +161,17 @@
     securityPolicy.validatesDomainName = NO;
     manager.securityPolicy = securityPolicy;
     
+    NSDictionary *headers = nil;
     if (NETConfig && [NETConfig respondsToSelector:@selector(extraHeaderParams:)]) {
-        NSDictionary *dict = [NETConfig extraHeaderParams:url];
-        NSArray *allKeys = [dict allKeys];
-        for (NSString *key in allKeys) {
-            [manager.requestSerializer setValue:dict[key] forHTTPHeaderField:key];
-        }
+        headers = [NETConfig extraHeaderParams:url];
     }
     
-    NSString *paramsURL = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    NSString *paramsURL = nil;
+    if ([params isKindOfClass:[NSString class]]) {
+        paramsURL = (NSString *)params;
+    } else {
+        paramsURL = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    }
     NSString *singleURL = [NSString stringWithFormat:@"%@+%@",url,paramsURL];
     if (![NETConfig addRequest:singleURL]) {
         NSError *error = [NSError errorWithDomain:@"不要频繁请求" code:1024 userInfo:nil];
@@ -181,8 +185,8 @@
             manager.requestSerializer.timeoutInterval = time;
         }
     }
-    
-    [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:url parameters:params headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         [NETConfig removeRequest:singleURL];
         if ([NETConfig respondsToSelector:@selector(needDecrypt:)] && [NETConfig needDecrypt:url]) {
             if ([NETConfig respondsToSelector:@selector(typeOfDecrypt:)]) {
@@ -203,7 +207,6 @@
             }
         }
         success(result);
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [NETConfig removeRequest:singleURL];
         failure(error);

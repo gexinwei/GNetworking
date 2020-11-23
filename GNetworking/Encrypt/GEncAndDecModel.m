@@ -22,7 +22,11 @@
  @return 加密后的数据
  */
 + (id)ENC:(id)source type:(EncryptType)type url:(NSString *)url{
-    if ([source isKindOfClass:[NSDictionary class]]) {
+    SepratorType sepType = PARAM_SEPRATOR_NONE;
+    if (NETConfig &&  [NETConfig respondsToSelector:@selector(sepratorTypeOfEncrypt:)]) {
+        sepType = [NETConfig sepratorTypeOfEncrypt:url];
+    }
+    if (sepType==PARAM_SEPRATOR_KEYVALUE && [source isKindOfClass:[NSDictionary class]]) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         NSArray *keys = ((NSDictionary *)source).allKeys;
         for (NSString *key in keys) {
@@ -38,7 +42,7 @@
             [dict setObject:encValue forKey:encKey];
         }
         return dict;
-    } else if ([source isKindOfClass:[NSArray class]]) {
+    } else if (sepType==PARAM_SEPRATOR_KEYVALUE && [source isKindOfClass:[NSArray class]]) {
         NSMutableArray *array = [NSMutableArray array];
         for (NSDictionary *dic in ((NSArray *)source)) {
             [array addObject:[GEncAndDecModel ENC:dic type:type url:url]];
@@ -65,6 +69,16 @@
                     NSString *ivArr = keyDict[DES_IV];
                     
                     if (key && ivArr) {
+                        if (![source isKindOfClass:[NSString class]]) {
+                            NSError *error;
+                            NSData *data = [NSJSONSerialization dataWithJSONObject:source options:NSJSONWritingFragmentsAllowed error:&error];
+                            if (!error) {
+                                source = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                            } else {
+                                encValue = [NSError errorWithDomain:@"DES加密失败，不是一个完整数据结构" code:0 userInfo:nil];
+                                break;
+                            }
+                        }
                         encValue = [GDESModel encryptUseDES:source key:key iv:ivArr];
                     } else {
                         encValue = [NSError errorWithDomain:@"DES加密方法获取加密参数 DES_KEY、DES_IV失败" code:0 userInfo:nil];
@@ -83,6 +97,16 @@
                     NSString *ivArr = keyDict[DES_IV];
                     
                     if (key && ivArr) {
+                        if (![source isKindOfClass:[NSString class]]) {
+                            NSError *error;
+                            NSData *data = [NSJSONSerialization dataWithJSONObject:source options:NSJSONWritingFragmentsAllowed error:&error];
+                            if (!error) {
+                                source = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                            } else {
+                                encValue = [NSError errorWithDomain:@"3DES加密失败，不是一个完整数据结构" code:0 userInfo:nil];
+                                break;
+                            }
+                        }
                         encValue = [GDESModel encryptUse3DES:source key:key iv:ivArr];
                     } else {
                         encValue = [NSError errorWithDomain:@"3DES加密方法获取加密参数 DES_KEY、DES_IV失败" code:0 userInfo:nil];
@@ -99,6 +123,17 @@
                 break;
             case EncryptType_RSA:
             {
+                if (![source isKindOfClass:[NSString class]]) {
+                    NSError *error;
+                    NSData *data = [NSJSONSerialization dataWithJSONObject:source options:NSJSONWritingFragmentsAllowed error:&error];
+                    if (!error) {
+                        source = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    } else {
+                        encValue = [NSError errorWithDomain:@"RSA加密失败，不是一个完整数据结构" code:0 userInfo:nil];
+                        break;
+                    }
+                }
+                
                 NSDictionary *keyDict = nil;
                 if (NETConfig && [NETConfig respondsToSelector:@selector(encryptKey:)]) {
                     keyDict = [NETConfig encryptKey:type];
@@ -136,7 +171,11 @@
  @return 解密后的数据
  */
 + (id)DEC:(id)source type:(EncryptType)type url:(NSString *)url {
-    if ([source isKindOfClass:[NSDictionary class]]) {
+    SepratorType sepType = PARAM_SEPRATOR_NONE;
+    if (NETConfig &&  [NETConfig respondsToSelector:@selector(sepratorTypeOfDecrypt:)]) {
+        sepType = [NETConfig sepratorTypeOfDecrypt:url];
+    }
+    if (sepType==PARAM_SEPRATOR_KEYVALUE && [source isKindOfClass:[NSDictionary class]]) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         NSArray *keys = ((NSDictionary *)source).allKeys;
         for (NSString *key in keys) {
@@ -154,7 +193,7 @@
             [dict setObject:decValue forKey:decKey];
         }
         return dict;
-    } else if ([source isKindOfClass:[NSArray class]]) {
+    } else if (sepType==PARAM_SEPRATOR_KEYVALUE && [source isKindOfClass:[NSArray class]]) {
         NSMutableArray *array = [NSMutableArray array];
         for (NSDictionary *dic in ((NSArray *)source)) {
             [array addObject:[GEncAndDecModel DEC:dic type:type url:url]];

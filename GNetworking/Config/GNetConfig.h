@@ -20,6 +20,11 @@ typedef enum {
     EncryptType_RSA,        //RSA加密
 }EncryptType;
 
+typedef enum {
+    PARAM_SEPRATOR_NONE,        //不分割，作为整体处理
+    PARAM_SEPRATOR_KEYVALUE,    //按照键值对分割处理
+}SepratorType;
+
 @protocol GNetConfigProtocol <NSObject>
 
 @required
@@ -78,6 +83,15 @@ typedef enum {
  @return 解密类型
  */
 - (EncryptType)typeOfDecrypt:(NSString *)url;
+
+
+/// 加密时使用——参数分割类型
+/// @param url 检验url
+- (SepratorType)sepratorTypeOfEncrypt:(NSString *)url;
+
+/// 解密时使用——参数分割类型
+/// @param url 检验url
+- (SepratorType)sepratorTypeOfDecrypt:(NSString *)url;
 
 /**
  加密key  非自定义加密类型使用
