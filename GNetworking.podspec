@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GNetworking'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = '简单好用、配置方便的网络请求库。'
 
 # This description is used to generate tags and improve search results.
@@ -53,5 +53,5 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'AFNetworking'
+  s.dependency 'AFNetworking','~>4.0.1'
 end
